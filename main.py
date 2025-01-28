@@ -63,11 +63,8 @@ def run_flow(
     input_type: str = "chat",
     tweaks: Optional[dict] = None,
 ) -> dict:
-    """
-    Sends a message to the Langflow API and retrieves the response.
-    """
     flow_data = load_flow()
-    flow_id = endpoint or flow_data.get("flows", [{}])[0].get("id")  # Default to the first flow ID
+    flow_id = endpoint or flow_data.get("flows", [{}])[0].get("id")
 
     if not flow_id:
         raise HTTPException(status_code=400, detail="No valid flow ID found.")
@@ -82,11 +79,16 @@ def run_flow(
         payload["tweaks"] = tweaks
 
     headers = {"Authorization": f"Bearer {APPLICATION_TOKEN}", "Content-Type": "application/json"}
+    logging.info(f"Sending request to LangFlow API: {api_url}")
+    logging.info(f"Payload: {payload}")
 
     response = requests.post(api_url, json=payload, headers=headers)
+    logging.info(f"LangFlow API response: {response.status_code}, {response.text}")
+
     if response.status_code != 200:
         raise HTTPException(status_code=response.status_code, detail=response.json())
     return response.json()
+
 
 @app.post("/chat")
 def chat(request: ChatRequest):
