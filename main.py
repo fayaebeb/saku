@@ -47,19 +47,7 @@ TWEAKS = {
     },
     "TextInput-crpI9": {
         "input_value": "suser1"
-    },
-    "OpenAIModel-DYBDI": {
-        "api_key": "",
-        "json_mode": False,
-        "max_tokens": None,
-        "model_kwargs": {},
-        "model_name": "gpt-4o-mini",
-        "openai_api_base": "",
-        "output_schema": {},
-        "seed": 1,
-        "stream": False,
-        "system_message": "",
-        "temperature": 0.1
+    
     }
 }
 
