@@ -17,7 +17,6 @@ TWEAKS = {
         "background_color": "",
         "chat_icon": "",
         "files": "",
-        "input_value": "",
         "sender": "User",
         "sender_name": "User",
         "session_id": "",
@@ -28,7 +27,6 @@ TWEAKS = {
         "background_color": "",
         "chat_icon": "",
         "data_template": "{text}",
-        "input_value": "",
         "sender": "Machine",
         "sender_name": "AI",
         "session_id": "",
@@ -52,7 +50,6 @@ TWEAKS = {
     },
     "OpenAIModel-DYBDI": {
         "api_key": "",
-        "input_value": "",
         "json_mode": False,
         "max_tokens": None,
         "model_kwargs": {},
@@ -104,6 +101,7 @@ def run_flow(
         "input_type": input_type,
     }
     if tweaks:
+        tweaks.pop("ChatInput-hoDbI", None)  # Remove conflicting tweak key
         payload["tweaks"] = tweaks
 
     headers = {"Authorization": f"Bearer {APPLICATION_TOKEN}", "Content-Type": "application/json"}
