@@ -17,7 +17,7 @@ TWEAKS = {
         "background_color": "",
         "chat_icon": "",
         "files": "",
-        "input_value": "hello",
+        "input_value": "",
         "sender": "User",
         "sender_name": "User",
         "session_id": "",
