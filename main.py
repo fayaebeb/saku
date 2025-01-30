@@ -11,46 +11,6 @@ FLOW_ID = "061c364a-1280-4b49-a56b-586d5dee8c8f"
 APPLICATION_TOKEN = "AstraCS:iQNdzmNUslRgkcfrJrEaTfTS:2d2adbb2b2c0b8994365af08a53570f059ff8e2d9733a9209ca5d292087f723e"
 ENDPOINT = ""  # Default endpoint
 
-# TWEAKS dictionary for customizing the flow
-TWEAKS = {
-    "ChatInput-hoDbI": {
-        "background_color": "",
-        "chat_icon": "",
-        "files": "",
-        "sender": "User",
-        "sender_name": "User",
-        "session_id": "",
-        "should_store_message": True,
-        "text_color": ""
-    },
-    "ChatOutput-5Zqvm": {
-        "background_color": "",
-        "chat_icon": "",
-        "data_template": "{text}",
-        "sender": "Machine",
-        "sender_name": "AI",
-        "session_id": "",
-        "should_store_message": True,
-        "text_color": ""
-    },
-    "Memory-hOGZN": {
-        "n_messages": 100,
-        "order": "Ascending",
-        "sender": "Machine and User",
-        "sender_name": "",
-        "session_id": "",
-        "template": "{sender_name}: {text}"
-    },
-    "Prompt-wiTCV": {
-        "memory": "",
-        "template": "あなたはサクラAIです。パシフィックコンサルタンツの AI コンサルタントです。主に日本語でコミュニケーションをとっています。\n\nUse markdown to format your answer, properly embedding images and urls.\n\nHistory: \n\n{memory}\n"
-    },
-    "TextInput-crpI9": {
-        "input_value": "suser1"
-    
-    }
-}
-
 # Initialize FastAPI app
 app = FastAPI()
 
