@@ -7,8 +7,8 @@ from typing import Optional
 # Constants
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
 LANGFLOW_ID = "2e964804-1fee-4340-bb22-099f1e785ec1"
-FLOW_ID = "061c364a-1280-4b49-a56b-586d5dee8c8f"
-APPLICATION_TOKEN = "AstraCS:iQNdzmNUslRgkcfrJrEaTfTS:2d2adbb2b2c0b8994365af08a53570f059ff8e2d9733a9209ca5d292087f723e"
+FLOW_ID = "380387dc-0f44-4a20-a12f-ea11ef39ec7e"
+APPLICATION_TOKEN = "AstraCS:ZlLgIzZPZbxfSEQetWjXUNZZ:76957e36b802c6015dcf8d68128c8ea0aca6f53d1a22e490078fa0e6e3ff3b08"
 ENDPOINT = ""  # Default endpoint
 
 # Initialize FastAPI app
@@ -49,7 +49,6 @@ def run_flow(
         "input_type": input_type,
     }
     if tweaks:
-        tweaks.pop("ChatInput-hoDbI", None)  # Remove conflicting tweak key
         payload["tweaks"] = tweaks
 
     headers = {"Authorization": f"Bearer {APPLICATION_TOKEN}", "Content-Type": "application/json"}
@@ -70,7 +69,7 @@ def chat(request: ChatRequest):
             endpoint=request.endpoint or ENDPOINT,
             output_type=request.output_type,
             input_type=request.input_type,
-            tweaks=request.tweaks or TWEAKS,
+            tweaks=request.tweaks,
         )
         return response
     except Exception as e:
