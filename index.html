@@ -3,20 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatbot</title>
+  <title>桜AI - Chatbot</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: url('background.avif') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    #chat-container {
+      max-width: 600px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    #logo {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
     }
     #chat-box {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
+      max-width: 100%;
+      height: 400px;
+      overflow-y: auto;
+      padding: 10px;
       border: 1px solid #ccc;
       border-radius: 10px;
       background: #f9f9f9;
-      height: 400px;
-      overflow-y: auto;
+      text-align: left;
     }
     .user-message {
       color: #fff;
@@ -54,13 +77,16 @@
   </style>
 </head>
 <body>
-  <h1 style="text-align: center;">Chatbot</h1>
-  <div id="chat-box"></div>
-  <div style="max-width: 600px; margin: 0 auto; display: flex; gap: 10px; padding: 10px;">
-    <input id="message-input" type="text" placeholder="Type your message..." />
-    <button id="send-button">Send</button>
+  <div id="chat-container">
+    <img id="logo" src="sklogo.png" alt="桜AI Logo">
+    <h1>桜AI - Chatbot</h1>
+    <div id="chat-box"></div>
+    <div style="display: flex; gap: 10px; padding: 10px;">
+      <input id="message-input" type="text" placeholder="Type your message..." />
+      <button id="send-button">Send</button>
+    </div>
   </div>
-
+  
   <script>
     const sendButton = document.getElementById("send-button");
     const messageInput = document.getElementById("message-input");
@@ -69,17 +95,13 @@
       const userInput = messageInput.value.trim();
       if (!userInput) return;
 
-      // Display user's message
       const chatBox = document.getElementById("chat-box");
       const userMessageElement = document.createElement("div");
       userMessageElement.className = "user-message";
       userMessageElement.textContent = userInput;
       chatBox.appendChild(userMessageElement);
 
-      // Clear input
       messageInput.value = "";
-
-      // Send message to the backend
       sendMessage(userInput);
     });
 
@@ -88,15 +110,10 @@
         const response = await fetch("/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: userInput,
-            tweaks: null,
-          }),
+          body: JSON.stringify({ message: userInput, tweaks: null })
         });
 
         const data = await response.json();
-
-        // Display AI's response
         const aiMessage = data.outputs[0].outputs[0].results.message.data.text;
 
         const chatBox = document.getElementById("chat-box");
@@ -104,7 +121,6 @@
         aiMessageElement.className = "ai-message";
         aiMessageElement.textContent = aiMessage;
         chatBox.appendChild(aiMessageElement);
-
         chatBox.scrollTop = chatBox.scrollHeight;
       } catch (error) {
         console.error("Error:", error);
