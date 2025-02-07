@@ -3,11 +3,16 @@
   "builds": [
     { "src": "main.py", "use": "@vercel/python" },
     { "src": "index.html", "use": "@vercel/static" },
-    { "src": "static/*", "use": "@vercel/static" }, 
+    { "src": "static/*", "use": "@vercel/static" },
     { "src": "*.png", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/chat", "dest": "main.py" },
     { "src": "/(.*)", "dest": "/$1" }
-  ]
+  ],
+  "functions": {
+    "main.py": {
+      "maxDuration": 60
+    }
+  }
 }
